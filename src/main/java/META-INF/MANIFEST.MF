@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: C:\1\prog\java\testwebserv\src\main\java\main
+Main-Class: main.Main
+
