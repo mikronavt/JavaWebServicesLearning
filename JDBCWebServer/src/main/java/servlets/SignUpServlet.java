@@ -15,15 +15,15 @@ import java.io.IOException;
 public class SignUpServlet extends HttpServlet {
     private final AccountService accountService;
 
-    public SignUpServlet(AccountService accountService){
+    public SignUpServlet(AccountService accountService) {
         this.accountService = accountService;
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String pass = request.getParameter("password");
 
-        if(login == null || pass == null){
+        if (login == null || pass == null) {
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         } else {

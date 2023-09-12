@@ -9,25 +9,27 @@ public class UsersDataSet {
     private String login;
     private String password;
 
-    public UsersDataSet(long id, String login, String password){
+    public UsersDataSet(long id, String login, String password) {
         this.id = id;
         this.login = login;
         this.password = password;
 
     }
 
-    public String getName(){
+    public String getName() {
         return login;
     }
 
-    public long getId(){
+    public long getId() {
         return id;
     }
 
-    public String getPassword(){return password;}
+    public String getPassword() {
+        return password;
+    }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "UsersDataSet{" +
                 "id=" + id +
                 ", login='" + login + '\'' +

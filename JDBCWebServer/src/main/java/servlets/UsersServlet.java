@@ -11,31 +11,31 @@ import java.io.IOException;
 /**
  * Created by User on 23.12.2015.
  */
-public class UsersServlet extends HttpServlet{
+public class UsersServlet extends HttpServlet {
     @SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"}) //todo: remove after module 2 home work
     private final AccountService accountService;
 
-    public UsersServlet(AccountService accountService){
+    public UsersServlet(AccountService accountService) {
         this.accountService = accountService;
     }
 
     //get public user profile
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     //sign up
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     //change profile
-    public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     //unregister
-    public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 

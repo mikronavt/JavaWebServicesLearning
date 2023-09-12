@@ -16,78 +16,78 @@ public class DBService {
 
     private final Connection connection;
 
-    public DBService(){
+    public DBService() {
         this.connection = getH2Connection();
     }
 
-    public UsersDataSet getUser(long id) throws DBException{
-        try{
+    public UsersDataSet getUser(long id) throws DBException {
+        try {
             return (new UsersDAO(connection).get(id));
-        } catch(SQLException e){
+        } catch (SQLException e) {
             throw new DBException(e);
         }
     }
 
-    public long addUser(String login, String password) throws DBException{
-        try{
+    public long addUser(String login, String password) throws DBException {
+        try {
             connection.setAutoCommit(false);
             UsersDAO dao = new UsersDAO(connection);
             dao.createTable();
             dao.insertUser(login, password);
             connection.commit();
             return dao.getUserId(login);
-        } catch (SQLException e){
-            try{
+        } catch (SQLException e) {
+            try {
                 connection.rollback();
 
-            } catch (SQLException ignore){}
+            } catch (SQLException ignore) {
+            }
 
             throw new DBException(e);
         } finally {
-            try{
+            try {
                 connection.setAutoCommit(true);
-            } catch (SQLException ignore){
+            } catch (SQLException ignore) {
 
             }
         }
     }
 
-    public long findUser(String login) throws DBException{
-        try{
+    public long findUser(String login) throws DBException {
+        try {
             UsersDAO dao = new UsersDAO(connection);
             return dao.getUserId(login);
-        } catch(SQLException e){
+        } catch (SQLException e) {
             throw new DBException(e);
         }
 
     }
 
-    public void cleanUp() throws DBException{
+    public void cleanUp() throws DBException {
         UsersDAO dao = new UsersDAO(connection);
-        try{
+        try {
             dao.dropTable();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new DBException(e);
         }
     }
 
 
-
-    public void printConnectInfo(){
-        try{
+    public void printConnectInfo() {
+        try {
             System.out.println("DB name: " + connection.getMetaData().getDatabaseProductName());
             System.out.println("DB version: " + connection.getMetaData().getDatabaseProductVersion());
             System.out.println("Driver: " + connection.getMetaData().getDriverName());
             System.out.println("Autocommit: " + connection.getAutoCommit());
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public static Connection getMySqlConnection(){
-        try{
+    public static Connection getMySqlConnection() {
+        try {
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
 
             StringBuilder url = new StringBuilder();
@@ -110,8 +110,8 @@ public class DBService {
 
     }
 
-    public static Connection getH2Connection(){
-        try{
+    public static Connection getH2Connection() {
+        try {
             String url = "jdbc:h2:./h2db";
             String name = "tully";
             String pass = "tully";
@@ -123,7 +123,7 @@ public class DBService {
 
             Connection connection = DriverManager.getConnection(url, name, pass);
             return connection;
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

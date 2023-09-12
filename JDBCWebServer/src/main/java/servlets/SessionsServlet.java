@@ -13,18 +13,18 @@ import java.io.IOException;
 /**
  * Created by User on 23.12.2015.
  */
-public class SessionsServlet extends HttpServlet{
+public class SessionsServlet extends HttpServlet {
     private final AccountService accountService;
 
-    public SessionsServlet(AccountService accountService){
+    public SessionsServlet(AccountService accountService) {
         this.accountService = accountService;
     }
 
     //get logged user profile
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String sessionId = request.getSession().getId();
         UserProfile profile = accountService.getUserBySessionId(sessionId);
-        if(profile == null){
+        if (profile == null) {
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         } else {
@@ -37,18 +37,18 @@ public class SessionsServlet extends HttpServlet{
     }
 
     //sign in
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String pass = request.getParameter("password");
 
-        if(login == null || pass == null){
+        if (login == null || pass == null) {
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         UserProfile profile = accountService.getUserByLogin(login);
-        if(profile == null || !profile.getPass().equals(pass)){
+        if (profile == null || !profile.getPass().equals(pass)) {
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
@@ -64,13 +64,13 @@ public class SessionsServlet extends HttpServlet{
     }
 
     //sign out
-    public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String sessionId = request.getSession().getId();
         UserProfile profile = accountService.getUserBySessionId(sessionId);
-        if(profile == null){
+        if (profile == null) {
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        } else{
+        } else {
             accountService.deleteSession(sessionId);
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().println("Goodbye!");

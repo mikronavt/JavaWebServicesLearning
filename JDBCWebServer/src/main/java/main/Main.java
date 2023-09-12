@@ -20,10 +20,10 @@ import servlets.UsersServlet;
  * Created by User on 29.12.2015.
  */
 public class Main {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         DBService dbService = new DBService();
         dbService.printConnectInfo();
-        try{
+        try {
             long userId = dbService.addUser("tully", "tully");
             System.out.println("Added user id: " + userId);
 

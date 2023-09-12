@@ -15,46 +15,45 @@ public class AccountService {
     private final Map<String, UserProfile> sessionIdToProfile;
     DBService dbService;
 
-    public AccountService(){
+    public AccountService() {
         //loginToProfile = new HashMap<String, UserProfile>();
         sessionIdToProfile = new HashMap<String, UserProfile>();
         dbService = new DBService();
         dbService.printConnectInfo();
     }
 
-    public void addNewUser(UserProfile userProfile){
-        try{
+    public void addNewUser(UserProfile userProfile) {
+        try {
             dbService.addUser(userProfile.getLogin(), userProfile.getPass());
             //loginToProfile.put(userProfile.getLogin(), userProfile);
-        } catch (DBException e){
+        } catch (DBException e) {
             e.printStackTrace();
         }
 
 
-
     }
 
-    public UserProfile getUserByLogin(String login){
+    public UserProfile getUserByLogin(String login) {
         try {
             long id = dbService.findUser(login);
             UsersDataSet dataSet = dbService.getUser(id);
             return new UserProfile(dataSet.getName(), dataSet.getPassword(), "nomail");
-        } catch (DBException e){
+        } catch (DBException e) {
             e.printStackTrace();
         }
         //return loginToProfile.get(login);
         return null;
     }
 
-    public UserProfile getUserBySessionId(String sessionId){
+    public UserProfile getUserBySessionId(String sessionId) {
         return sessionIdToProfile.get(sessionId);
     }
 
-    public void addSession(String sessionId, UserProfile userProfile){
+    public void addSession(String sessionId, UserProfile userProfile) {
         sessionIdToProfile.put(sessionId, userProfile);
     }
 
-    public void deleteSession(String sessionId){
+    public void deleteSession(String sessionId) {
         sessionIdToProfile.remove(sessionId);
     }
 
