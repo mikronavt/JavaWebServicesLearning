@@ -1,0 +1,19 @@
+﻿﻿#############
+## Idea
+#############
+target/
+../.idea/
+.idea
+.repository/
+*.iml
+*.iws
+*.jrtc
+*.java
+*.class
+*.info
+*.jar
+
+/out/
+/Instruction.png
+/out.log
+/out.log.*
